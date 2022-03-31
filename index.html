@@ -5,7 +5,28 @@
 <script>
   window.OneSignal = window.OneSignal || [];
   OneSignal.push(function() {
-   OneSignal.showSlidedownPrompt(); 
+   OneSignal.showSlidedownPrompt();
+    promptOptions: {
+      slidedown: {
+        prompts: [
+          {
+            type: "push", // current types are "push" & "category"
+            autoPrompt: true,
+            text: {
+              /* limited to 90 characters */
+              actionMessage: "We'd like to show you notifications for the latest news and updates.",
+              /* acceptButton limited to 15 characters */
+              acceptButton: "Allow",
+              /* cancelButton limited to 15 characters */
+              cancelButton: "Cancel"
+            },
+            delay: {
+              pageViews: 1,
+              timeDelay: 20
+            }
+          }
+        ]
+      }
     OneSignal.init({
       appId: "11ee6dee-8fea-4b08-9b12-b15c9afbf19b",
       safari_web_id: "web.onesignal.auto.5e2915a8-1095-4900-b2af-7b25bf2970dd",
