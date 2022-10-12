@@ -19,24 +19,50 @@
           timeDelay: 20,
           pageViews: 3,
           
+       promptOptions: {
+      slidedown: {
         prompts: [
           {
-            type: "push", // current types are "push" & "category"
+            type: "category",
             autoPrompt: true,
             text: {
-              /* limited to 90 characters */
-              actionMessage: "What do you use first?",
-              /* acceptButton limited to 15 characters */
-              acceptButton: "Jelly",
-              /* cancelButton limited to 15 characters */
-              cancelButton: "Peanut Butter"
+              actionMessage: "We'd like to show you notifications for the latest news and updates.",
+              acceptButton: "Allow",
+              cancelButton: "Cancel",
+
+              /* CATEGORY SLIDEDOWN SPECIFIC TEXT */
+              negativeUpdateButton:"Cancel",
+              positiveUpdateButton:"Save Preferences",
+              updateMessage: "Update your push notification subscription preferences.",
             },
+            delay: {
+              pageViews: 1,
+              timeDelay: 20
+            },
+            categories: [
+              {
+                tag: "politics",
+                label: "Politics"
+              },
+              {
+                tag: "local_news",
+                label: "Local News"
+              },
+              {
+                tag: "world_news",
+                label: "World News",
+              },
+              {
+                tag: "culture",
+                label: "Culture"
+              },
+            ]
           }
         ]
-       }
       }
-    });
-  });
+    }
+    // END promptOptions, continue with other init options
+}
   </script>
    <meta charset="utf-8">
     <title>Orion</title>
