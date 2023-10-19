@@ -1,51 +1,75 @@
-<script>
-  function createUnsubscribeURL(href) {
-    try {
-      const url = new URL(href);
-      const appID = url.searchParams.get("app_id");
-      const notificationID = url.searchParams.get("notification_id");
-      const unsubscribeToken = url.searchParams.get("token");
-      const language = url.searchParams.get("language");
-      const email = url.searchParams.get("email");
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Unsubscribe</title>
+    <style>
+      /* Your CSS styles here */
+    </style>
+  </head>
+  <body>
+    <div class="container">
+      <h1>Unsubscribe</h1>
+      <p>
+        Unsubscribe <span id="email"></span> from all marketing email messages?
+      </p>
+      <button id="unsubscribe_button" type="button" class="unsubscribe-button">
+        Unsubscribe
+      </button>
+    </div>
+  </body>
+  <script>
+    function createUnsubscribeURL(href) {
+      try {
+        const url = new URL(href);
+        const appID = url.searchParams.get("app_id");
+        const notificationID = url.searchParams.get("notification_id");
+        const unsubscribeToken = url.searchParams.get("token");
+        const language = url.searchParams.get("language");
+        const email = url.searchParams.get("email");
 
-      // Encode the email address
-      const encodedEmail = encodeURIComponent(email);
+        // Encode the email address
+        const encodedEmail = encodeURIComponent(email);
 
-      return {
-        unsubscribeURL: `https://api.onesignal.com/apps/${appID}/notifications/${notificationID}/unsubscribe?token=${unsubscribeToken}&email=${encodedEmail}`,
-        meta: { language, email },
-      };
-    } catch (error) {
-      console.error(`Failed to parse '${href}'`, error.message);
+        return {
+          unsubscribeURL: `https://api.onesignal.com/apps/${appID}/notifications/${notificationID}/unsubscribe?token=${unsubscribeToken}&email=${encodedEmail}`,
+          meta: { language, email },
+        };
+      } catch (error) {
+        console.error(`Failed to parse '${href}'`, error.message);
+      }
     }
-  }
 
-  const createClickHandler = (unsubscribeURL) => (event) => {
-    fetch(unsubscribeURL, {
-      method: "POST",
-    })
-      .then((res) => {
-        switch (res.status) {
-          case 202:
-            alert("Perfect! You've been unsubscribed.");
-            break;
-          case 400:
-            alert("Something went wrong, get in touch to unsubscribe.");
-            break;
-          case 500:
-            alert("Something went wrong, get in touch to unsubscribe.");
-            break;
-        }
+    const createClickHandler = (unsubscribeURL) => (event) => {
+      fetch(unsubscribeURL, {
+        method: "POST",
       })
-      .catch((error) => console.error("Fatal error occurred", error.message));
-  };
+        .then((res) => {
+          switch (res.status) {
+            case 202:
+              alert("Perfect! You've been unsubscribed.");
+              break;
+            case 400:
+              alert("Something went wrong, get in touch to unsubscribe.");
+              break;
+            case 500:
+              alert("Something went wrong, get in touch to unsubscribe.");
+              break;
+          }
+        })
+        .catch((error) => console.error("Fatal error occurred", error.message));
+    };
 
-  document.addEventListener("DOMContentLoaded", () => {
-    const { unsubscribeURL, meta } = createUnsubscribeURL(window.location.href);
-    const buttonEl = document.getElementById("unsubscribe_button");
-    buttonEl.addEventListener("click", createClickHandler(unsubscribeURL));
+    document.addEventListener("DOMContentLoaded", () => {
+      const { unsubscribeURL, meta } = createUnsubscribeURL(
+        window.location.href
+      );
+      const buttonEl = document.getElementById("unsubscribe_button");
+      buttonEl.addEventListener("click", createClickHandler(unsubscribeURL));
 
-    const emailEl = document.getElementById("email");
-    emailEl.innerText = `${meta.email || ""}`;
-  });
-</script>
+      const emailEl = document.getElementById("email");
+      emailEl.innerText = `${meta.email || ""}`;
+    });
+  </script>
+</html>
