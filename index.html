@@ -1,56 +1,15 @@
 <!DOCTYPE html>
-<head>
-  <script src="https://cdn.onesignal.com/sdks/OneSignalSDK.js"></script>
-  <style>
-    /* Inline styles to position the OneSignal prompt on the side */
-    .onesignal-slidedown-container {
-      right: 0 !important; /* Move prompt to the right side of the screen */
-      left: auto !important; /* Disable left positioning to keep it on the right */
-      width: 300px !important; /* Adjust width as needed */
-      top: 50px !important; /* Adjust vertical position if needed */
-    }
-
-    .onesignal-slidedown-slidebody {
-      display: flex !important;
-      flex-direction: column !important;
-      align-items: flex-start !important;
-      padding: 20px !important; /* Adjust padding to style the prompt */
-    }
-  </style>
-</head>
-<body>
-  <script>
-    OneSignal.init({
-        window.OneSignalDeferred = window.OneSignalDeferred || [];
+<script src="https://cdn.onesignal.com/sdks/web/v16/OneSignalSDK.page.js" defer></script>
+<script>
+  window.OneSignalDeferred = window.OneSignalDeferred || [];
   OneSignalDeferred.push(async function(OneSignal) {
     await OneSignal.init({
       appId: "11ee6dee-8fea-4b08-9b12-b15c9afbf19b",
       safari_web_id: "web.onesignal.auto.5e2915a8-1095-4900-b2af-7b25bf2970dd",
-      promptOptions: {
-        slidedown: {
-          prompts: [
-            {
-              type: "smsAndEmail",
-              autoPrompt: false,
-              text: {
-                emailLabel: "Insert Email Address",
-                smsLabel: "Insert Phone Number",
-                acceptButton: "Submit",
-                cancelButton: "No Thanks",
-                actionMessage: "Receive the latest news, updates and offers as they happen.",
-                updateMessage: "Update your push notification subscription preferences.",
-                confirmMessage: "Thank You!",
-                positiveUpdateButton: "Save Preferences",
-                negativeUpdateButton: "Cancel",
-              },
-              delay: {
-                pageViews: 1,
-                timeDelay: 20
-              },
-            },
-          ]
-        }
-      }
+      notifyButton: {
+        enable: true,
+      },
     });
-  </script>
+  });
+</script>
 </body>
