@@ -1,57 +1,49 @@
 <!DOCTYPE html>
-<html lang="en">
+<html>
 <head>
- OneSignalDeferred.push(function(OneSignal) {
-  OneSignal.init({
-    appId: "11ee6dee-8fea-4b08-9b12-b15c9afbf19b",
-    promptOptions:{
-      slidedown: {
-        prompts: [
-          {
-            type: "category",
-            autoPrompt: true,
-            text: {
-              /* actionMessage limited to 90 characters */
-              actionMessage: "Your Custom Action Message",
-              /* acceptButton limited to 15 characters */
-              acceptButtonText: "Yes",
-              /* cancelButton limited to 15 characters */
-              cancelButtonText: "No",
-              /* CATEGORY SLIDEDOWN SPECIFIC TEXT */
-              negativeUpdateButton:"Cancel",
-              positiveUpdateButton:"Save Preferences",
-              updateMessage: "Update your push notification subscription preferences.",
-            },
-            delay: {
-              timeDelay: 1,//seconds to wait for display
-              pageViews: 1,//# pageviews for prompt to display
-            },
-            categories: [
-              {
-                tag: "politics",
-                label: "Politics",
+ <script src="https://cdn.onesignal.com/sdks/web/v16/OneSignalSDK.page.js" defer></script>
+<script>
+  window.OneSignalDeferred = window.OneSignalDeferred || [];
+  OneSignalDeferred.push(async function(OneSignal) {
+    await OneSignal.init({
+      appId: "11ee6dee-8fea-4b08-9b12-b15c9afbf19b",
+      safari_web_id: "web.onesignal.auto.5e2915a8-1095-4900-b2af-7b25bf2970dd",
+      notifyButton: {
+        enable: true,
+      },
+      promptOptions: {
+        slidedown: {
+          prompts: [
+            {
+              type: "category",
+              autoPrompt: true,
+              text: {
+                actionMessage: "Your Custom Action Message",
+                acceptButtonText: "Yes",
+                cancelButtonText: "No",
+                negativeUpdateButton: "Cancel",
+                positiveUpdateButton: "Save Preferences",
+                updateMessage: "Update your push notification subscription preferences.",
               },
-              {
-                tag: "local_news",
-                label: "Local News",
+              delay: {
+                timeDelay: 1, // seconds to wait for display
+                pageViews: 1, // # pageviews for prompt to display
               },
-              {
-                tag: "world_news",
-                label: "World News",
-              },
-              {
-                tag: "culture",
-                label: "Culture",
-              }
-            ]
-          }
-        ]
+              categories: [
+                { tag: "politics", label: "Politics" },
+                { tag: "local_news", label: "Local News" },
+                { tag: "world_news", label: "World News" },
+                { tag: "culture", label: "Culture" }
+              ]
+            }
+          ]
+        }
       }
-    }
+    });
   });
-});
+</script>
 </head>
 <body>
-  <h3>OneSignal Web Push Notifications with category</h3>
+<h3>/Category Slidedown</h3>
 </body>
 </html>
