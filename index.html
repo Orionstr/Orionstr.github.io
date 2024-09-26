@@ -7,6 +7,31 @@
   OneSignalDeferred.push(async function(OneSignal) {
     await OneSignal.init({
       appId: "11ee6dee-8fea-4b08-9b12-b15c9afbf19b",
+      promptOptions: {
+        slidedown: {
+          prompts: [
+            {
+              type: "smsAndEmail",
+              autoPrompt: false,
+              text: {
+                emailLabel: "Insert Email Address",
+                smsLabel: "Insert Phone Number",
+                acceptButton: "Submit",
+                cancelButton: "No Thanks",
+                actionMessage: "Receive the latest news, updates and offers as they happen.",
+                updateMessage: "Update your push notification subscription preferences.",
+                confirmMessage: "Thank You!",
+                positiveUpdateButton: "Save Preferences",
+                negativeUpdateButton: "Cancel",
+              },
+              delay: {
+                pageViews: 1,
+                timeDelay: 20
+              }
+            }
+          ]
+        }
+      }
     });
   });
 </script>
